@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Ứng viên gửi CV{% endblock %}
+
+{% block content %}
+<div class="card card-upload" style="max-width: 600px; margin: auto; padding: 36px; text-align: center;">
+
+    <!-- Hình minh họa -->
+    <img src="{{ url_for('static', filename='undraw_online-resume_z4sp.svg') }}" alt="Upload Illustration"
+        style="width: 250px; margin-bottom: 16px; opacity: 0.9;">
+
+    <h2 style="color: #4FC3F7;">📤 Gửi CV của bạn</h2>
+
+    <!-- Bước tiến trình -->
+    <div style="color:#90CAF9; font-size: 14px; margin-top: 8px; margin-bottom: 20px;">
+        <span style="color:#FFD54F;">1️⃣ Bước 1:</span> Tải lên CV ➡️
+        <span>2️⃣ Xem lại</span> ➡️
+        <span>3️⃣ Gửi chính thức</span>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" style="margin-top: 16px;">
+        <input type="file" name="cv" required
+            style="padding: 10px; width: 80%; max-width: 400px; border: 1px solid #444; border-radius: 6px; margin-bottom: 15px;">
+        <input type="hidden" name="action" value="analyze">
+        <br>
+        <button type="submit">
+            📄 Phân tích CV
+        </button>
+    </form>
+
+
+
+    {% if info %}
+    <hr style="margin: 30px 0;">
+    <h3 style="color: #4FC3F7;">✅ Thông tin trích xuất</h3>
+    <div style="text-align: left; margin-top: 15px; color: #EDEDED;">
+        <p><b>👤 Họ tên:</b> {{ info.FullName }}</p>
+        <p><b>📧 Email:</b> {{ info.Email }}</p>
+        <p><b>📱 SĐT:</b> {{ info.PhoneNumber }}</p>
+        <p><b>💡 Kỹ năng:</b> {{ info.Skills | join(', ') }}</p>
+    </div>
+
+    {% if show_submit %}
+    <form method="POST" style="margin-top: 20px;">
+        <input type="hidden" name="action" value="submit">
+        <input type="hidden" name="resume_json" value='{{ info | tojson | safe }}'>
+        <button type="submit">
+            📤 Gửi CV chính thức
+        </button>
+    </form>
+    {% endif %}
+    {% endif %}
+    <!-- Lợi ích khi gửi -->
+
+
+    {% if submitted %}
+    <p class="success" style="margin-top: 20px;">🎉 CV của bạn đã được gửi thành công!</p>
+    {% endif %}
+
+    <ul
+        style="list-style: none; text-align: left; max-width: 420px; margin: 24px auto 0; color: #BBB; font-size: 15px; line-height: 1.6;">
+        <li>✔️ Xem nhanh thông tin cá nhân</li>
+        <li>✔️ Kiểm tra kỹ năng nổi bật đã được trích xuất</li>
+        <li>✔️ Xác nhận thông tin trước khi gửi cho HR</li>
+    </ul>
+</div>
+{% endblock %}

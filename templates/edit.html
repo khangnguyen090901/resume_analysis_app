@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Chỉnh sửa ứng viên{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 520px; margin: 36px auto; padding: 32px 28px;">
+    <h2 style="color:#4FC3F7; text-align:center; margin-bottom: 28px;">🛠️ Chỉnh sửa thông tin ứng viên</h2>
+    <form method="POST">
+        <div style="margin-bottom: 16px;">
+            <label for="full_name" style="color:#FFD54F; font-weight:500;">Họ tên:</label>
+            <input type="text" id="full_name" name="full_name" value="{{ cv.full_name }}" style="width:100%;" required>
+        </div>
+        <div style="margin-bottom: 16px;">
+            <label for="email" style="color:#FFD54F; font-weight:500;">Email:</label>
+            <input type="text" id="email" name="email" value="{{ cv.email }}" style="width:100%;" required>
+        </div>
+        <div style="margin-bottom: 16px;">
+            <label for="phone" style="color:#FFD54F; font-weight:500;">SĐT:</label>
+            <input type="text" id="phone" name="phone" value="{{ cv.phone }}" style="width:100%;" required>
+        </div>
+        <div style="margin-bottom: 16px;">
+            <label for="last_job_title" style="color:#FFD54F; font-weight:500;">Vị trí:</label>
+            <input type="text" id="last_job_title" name="last_job_title" value="{{ cv.last_job_title }}" style="width:100%;">
+        </div>
+        <div style="margin-bottom: 16px;">
+            <label for="experience" style="color:#FFD54F; font-weight:500;">Kinh nghiệm:</label>
+            <input type="number" id="experience" name="experience" value="{{ cv.experience }}" min="0" max="50" style="width:100%;">
+        </div>
+        <div style="margin-bottom: 16px;">
+            <label for="home_address" style="color:#FFD54F; font-weight:500;">Địa chỉ:</label>
+            <input type="text" id="home_address" name="home_address" value="{{ cv.home_address }}" style="width:100%;">
+        </div>
+        <div style="margin-bottom: 16px;">
+            <label for="skills" style="color:#FFD54F; font-weight:500;">Kỹ năng:</label>
+            <input type="text" id="skills" name="skills" value="{{ cv.skills | join(', ') }}" style="width:100%;">
+        </div>
+        <div style="margin-bottom: 16px;">
+            <label for="tools" style="color:#FFD54F; font-weight:500;">Công cụ:</label>
+            <input type="text" id="tools" name="tools" value="{{ cv.tools | join(', ') }}" style="width:100%;">
+        </div>
+
+        <!-- GitHub -->
+        <div style="margin-bottom: 16px;">
+            <label for="github" style="color:#FFD54F; font-weight:500;">GitHub URL:</label>
+            <input type="url" id="github" name="github" value="{{ cv.github or '' }}" style="width:100%;">
+        </div>
+
+        <!-- LinkedIn -->
+        <div style="margin-bottom: 24px;">
+            <label for="linkedin" style="color:#FFD54F; font-weight:500;">LinkedIn URL:</label>
+            <input type="url" id="linkedin" name="linkedin" value="{{ cv.linkedin or '' }}" style="width:100%;">
+        </div>
+
+        <div style="display: flex; gap: 12px;">
+            <button type="submit"
+                style="flex:1; height:48px; background: linear-gradient(90deg,#1976D2 60%,#4FC3F7 100%);
+                       color:#fff; border:none; border-radius:6px; font-weight:600; display:flex;
+                       align-items:center; justify-content:center; cursor:pointer; transition:opacity 0.2s;">
+                💾 Lưu thay đổi
+            </button>
+            <a href="{{ url_for('hr.detail', id=cv._id) }}"
+                style="flex:1; height:48px; background: linear-gradient(90deg,#E53935 60%,#FF8A65 100%);
+                       color:#fff; border:none; border-radius:6px; font-weight:600; display:flex;
+                       align-items:center; justify-content:center; text-decoration:none; cursor:pointer;
+                       transition:opacity 0.2s;">
+                ❌ Hủy
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Dashboard HR{% endblock %}
+
+{% block content %}
+
+<!-- 🔍 Bộ lọc -->
+<!-- Banner / Hình ảnh minh họa -->
+<div style="text-align:center; margin-bottom: 16px;">
+    <img src="{{ url_for('static', filename='undraw_online-information_hhp2.svg') }}" alt="Dashboard Illustration"
+        style="max-height: 180px;">
+</div>
+
+<!-- Tiêu đề + Tổng số -->
+<div style="position: relative; max-width: 880px; margin: 0 auto 24px auto; height: 40px;">
+    <!-- Dashboard ở giữa -->
+    <h2 style="
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #4FC3F7;
+        margin: 0;">
+        📋 Dashboard Ứng viên
+    </h2>
+
+    <!-- Tổng ứng viên ở bên phải -->
+    <div style="position: absolute; right: 0; top: 4px; color: #81C784; font-size: 1.1em;">
+        👥 Tổng ứng viên: <b style="color:#FFD54F;">{{ resumes | length }}</b>
+    </div>
+</div>
+
+
+<!-- Bộ lọc gọn gàng -->
+<div
+    style="max-width: 880px; margin: 0 auto 32px auto; background: #1e1e2f; border-radius: 10px; border:1px solid #333; padding: 20px;">
+    <form method="GET" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+
+        <!-- Ô tìm kiếm -->
+        <input type="text" name="search" value="{{ request.args.get('search','') }}"
+            placeholder="🔍 Tìm theo tên, email, kỹ năng..."
+            style="grid-column: 1 / -1; background:#181A20; color:#EDEDED; border:1px solid #444; border-radius:6px; padding:10px; font-size:1em;">
+
+        <!-- Lọc theo kỹ năng -->
+        <select name="skill"
+            style="background:#181A20; color:#81C784; border:1px solid #444; border-radius:6px; padding:10px; font-size:1em;">
+            <option value="">-- Kỹ năng --</option>
+            {% for skill in all_skills %}
+            <option value="{{ skill }}" {% if request.args.get('skill')==skill %}selected{% endif %}>{{ skill }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <!-- Lọc theo vị trí -->
+        <select name="filter"
+            style="background:#181A20; color:#FFD54F; border:1px solid #444; border-radius:6px; padding:10px; font-size:1em;">
+            <option value="">-- Vị trí --</option>
+            {% for pos in positions %}
+            <option value="{{ pos }}" {% if request.args.get('filter')==pos %}selected{% endif %}>{{ pos }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- KN tối thiểu -->
+        <input type="number" name="min_exp" value="{{ request.args.get('min_exp', '') }}" min="0" max="20"
+            placeholder="KN tối thiểu"
+            style="background:#181A20; color:#FFF176; border:1px solid #444; border-radius:6px; padding:10px; font-size:1em;">
+
+        <!-- Nút lọc -->
+        <button type="submit"
+            style="background:#4FC3F7; color:#000; border:none; border-radius:6px; padding:10px; font-size:1em; cursor:pointer;">
+            🔎 Lọc
+        </button>
+    </form>
+</div>
+
+
+<!-- Tổng số ứng viên -->
+<h2 style="text-align:center; color:#4FC3F7; margin-bottom:24px;">
+    <span style="font-size:1.3em;">📋</span> Danh sách ứng viên
+</h2>
+
+<!-- 📋 Danh sách ứng viên -->
+<div
+    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; max-width: 1200px; margin: auto;">
+    {% for cv in resumes %}
+    <div class="card"
+        style="background:#2a2a3b; color:white; padding:16px; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; flex-direction: column; justify-content: space-between;">
+
+        <div style="display: flex; gap: 16px;">
+            <div>
+                <p><b style="color:#90CAF9;">👤 Họ tên:</b> {{ cv.full_name }}</p>
+                <p><b style="color:#FFD54F;">💼 Vị trí:</b> {{ cv.last_job_title }}</p>
+                <p><b style="color:#4FC3F7;">⏳ Kinh nghiệm:</b> {{ cv.experience if cv.experience is not none else 0 }}
+                    năm</p>
+                <p><b style="color:#FBC02D;">📧 Email:</b> {{ cv.email }}</p>
+                <p><b style="color:#81C784;">💡 Kỹ năng:</b> {{ cv.skills | join(', ') }}</p>
+            </div>
+        </div>
+
+        <div class="actions" style="margin-top:18px; display:flex; gap: 10px;">
+            <a href="{{ url_for('hr.detail', id=cv._id) }}" class="btn btn-detail"
+                style="flex:1; background:#4FC3F7; color:#000; padding:8px 12px; border-radius:6px; text-align:center; text-decoration:none;">📄
+                Xem chi tiết</a>
+            <a href="{{ url_for('hr.edit', id=cv._id) }}" class="btn btn-edit"
+                style="flex:1; background:#FFD54F; color:#000; padding:8px 12px; border-radius:6px; text-align:center; text-decoration:none;">✏️
+                Sửa</a>
+            <a href="{{ url_for('hr.delete', id=cv._id) }}" class="btn btn-delete"
+                onclick="return confirm('Bạn có chắc chắn muốn xoá ứng viên này không?')"
+                style="flex:1; background:#E57373; color:#fff; padding:8px 12px; border-radius:6px; text-align:center; text-decoration:none;">🗑️
+                Xoá</a>
+        </div>
+    </div>
+    {% else %}
+    <p style="color:#EDEDED; grid-column: 1 / -1; text-align: center;">Không có ứng viên nào.</p>
+    {% endfor %}
+</div>
+{% endblock %}

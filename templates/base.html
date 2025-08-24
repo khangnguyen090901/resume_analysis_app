@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}CV Analyzer{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>📄 Ứng dụng phân tích CV</h1>
+        <nav>
+            <a href="/">Ứng viên</a> |
+            <a href="/hr/login">HR</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p style="text-align:center; font-size:12px;">&copy; 2025 CV Analyzer</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,290 @@
+/* ==== DARK THEME CV ANALYZER ==== */
+
+/* Nền tối, chữ sáng, màu nhấn xanh */
+body {
+    background: #181A20;
+    color: #EDEDED;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background: #23272F;
+    color: #4FC3F7;
+    padding: 24px 0 12px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 8px 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+nav a {
+    color: #90CAF9;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #FFD54F;
+}
+
+/* Main */
+main {
+    padding: 32px 0;
+    min-height: 70vh;
+}
+
+/* Footer */
+footer {
+    background: #23272F;
+    color: #888;
+    padding: 16px 0 8px 0;
+    font-size: 13px;
+    border-top: 1px solid #222;
+    margin-top: 32px;
+}
+
+/* Form Elements */
+input,
+textarea,
+select,
+button {
+    background: #23272F;
+    color: #EDEDED;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    transition: border 0.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #4FC3F7;
+    outline: none;
+}
+
+button {
+    background: linear-gradient(90deg, #1976D2 60%, #4FC3F7 100%);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #1565C0 60%, #29B6F6 100%);
+}
+
+/* Card UI */
+.card {
+    background: #23272F;
+    border: 1px solid #333;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    padding: 20px;
+    margin-bottom: 18px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card h2,
+.card h3 {
+    color: #1976D2;
+    margin-top: 0;
+}
+
+.card p,
+.card li,
+.card label,
+.card b {
+    color: #EDEDED;
+}
+
+.card .actions {
+    margin-top: 15px;
+}
+
+.card .btn {
+    background: #1976D2;
+    color: #fff;
+    border: none;
+    padding: 7px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 8px;
+    transition: background 0.2s;
+    display: inline-block;
+    font-size: 0.95em;
+}
+
+.card .btn-detail {
+    background: #1976D2;
+}
+
+.card .btn-edit {
+    background: #FBC02D;
+    color: #23272F;
+}
+
+.card .btn-delete {
+    background: #E53935;
+}
+
+.card .btn:hover {
+    opacity: 0.85;
+}
+
+/* Card form fields */
+.card input,
+.card textarea,
+.card select {
+    background: #181A20;
+    color: #EDEDED;
+    border: 1px solid #444;
+}
+
+.card input:focus,
+.card textarea:focus,
+.card select:focus {
+    border-color: #4FC3F7;
+}
+
+/* Card inner hr */
+.card hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 24px 0;
+}
+
+/* Highlight extracted info */
+.card .extracted {
+    color: #FFD54F;
+    font-weight: 500;
+}
+
+/* Success, error, info messages */
+.success {
+    color: #4FC3F7;
+    font-weight: bold;
+}
+
+.error {
+    color: #E53935;
+    font-weight: bold;
+}
+
+.info {
+    color: #FFD54F;
+    font-weight: bold;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    background: #23272F;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .card {
+        padding: 12px;
+        max-width: 98vw;
+    }
+
+    main {
+        padding: 12px 0;
+    }
+
+    header h1 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Custom file input for dark theme */
+input[type="file"] {
+    background: #23272F;
+    color: #EDEDED;
+    border: 1px solid #444;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+/* Placeholder color for textarea/input */
+input::placeholder,
+textarea::placeholder {
+    color: #888;
+    opacity: 1;
+}
+
+/* Disabled state */
+input:disabled,
+button:disabled,
+textarea:disabled {
+    background: #222;
+    color: #888;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Input group for login */
+.input-group {
+    display: flex;
+    align-items: center; 
+    background: #181A20;
+    border: 1px solid #444;
+    border-radius: 6px;
+    height: 44px;
+    margin-bottom: 18px;
+}
+
+.input-group span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    color: #90CAF9;
+    flex-shrink: 0;
+}
+
+.input-group input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #EDEDED;
+    padding: 0 8px; 
+    font-size: 14px;
+    height: 80%;
+    line-height: 32px; 
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    outline: none;
+}
+.card-upload {
+    background: #23272F;
+    border: 1px solid #2E2E2E;
+    border-radius: 12px;
+    padding: 36px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
