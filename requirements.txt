@@ -1,4 +1,5 @@
 flask
+gunicorn
 python-dotenv
 openai==1.23.6
 torch==2.0.1
