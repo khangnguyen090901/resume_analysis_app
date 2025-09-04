@@ -2,7 +2,7 @@ flask
 gunicorn
 python-dotenv
 openai==1.23.6
-torch==2.0.1
+torch==2.5.1
 transformers==4.37.2
 scikit-learn==1.6.1
 pymupdf
